@@ -1,9 +1,16 @@
+import {useState} from 'react';
 import Header from "./components/Header/Header";
 import CoreConcepts from "./components/CoreConcepts";
 import { CORE_CONCEPTS } from "./data";
 import TabButtons from "./components/TabButtons";
 
 function App() {
+  const [selected, useSelected] = useState('Initial State')
+  
+  function selectHandler(selectedBtn) {
+    useSelected(selectedBtn)
+    console.log(selected);
+  }
   return (
     <div>
       <Header />
@@ -23,12 +30,13 @@ function App() {
         <section id="examples">
           <h2>Examples</h2>
           <menu>
-            <TabButtons>Components</TabButtons>
-            <TabButtons>JSX</TabButtons>
-            <TabButtons>Props</TabButtons>
-            <TabButtons>State</TabButtons>
+            <TabButtons onSelect={()=> selectHandler('components')}>Components</TabButtons>
+            <TabButtons onSelect={()=> selectHandler('jsx')}>JSX</TabButtons>
+            <TabButtons onSelect={()=> selectHandler('props')}>Props</TabButtons>
+            <TabButtons onSelect={()=> selectHandler('state')}>State</TabButtons>
           </menu>
         </section>
+        <h2>{selected}</h2>
       </main>
     </div>
   );
