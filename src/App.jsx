@@ -3,13 +3,14 @@ import Header from "./components/Header/Header";
 import CoreConcepts from "./components/CoreConcepts";
 import { CORE_CONCEPTS } from "./data";
 import TabButtons from "./components/TabButtons";
+import { EXAMPLES } from './data';
 
 function App() {
-  const [selected, useSelected] = useState('Initial State')
+  const [selectedTopic, useSelectedTopic] = useState('components')
   
   function selectHandler(selectedBtn) {
-    useSelected(selectedBtn)
-    console.log(selected);
+    useSelectedTopic(selectedBtn)
+    console.log(selectedTopic);
   }
   return (
     <div>
@@ -36,7 +37,16 @@ function App() {
             <TabButtons onSelect={()=> selectHandler('state')}>State</TabButtons>
           </menu>
         </section>
-        <h2>{selected}</h2>
+        <div id='tab-content'>
+          <h2>{EXAMPLES[selectedTopic].title}</h2>
+          <p>{EXAMPLES[selectedTopic].description}</p>
+          <pre>
+            <code>
+            {EXAMPLES[selectedTopic].code}
+            </code>
+          </pre>
+
+        </div>
       </main>
     </div>
   );
