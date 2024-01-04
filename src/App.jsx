@@ -26,6 +26,27 @@ function App() {
       </div>
     );
   }
+
+  const [selectedBtn, useSelectedBtn] = useState()
+  function handleSelect(btn){
+    if(btn == 'proceed'){
+      useSelectedBtn(false)
+    }else{
+      useSelectedBtn(true)
+    }
+    
+  }
+
+  let choosen =   <button onClick={()=>handleSelect('del')}>Delete</button>;
+
+  if(selectedBtn){
+    choosen =   <div data-testid="alert" id="alert">
+    <h2>Are you sure?</h2>
+    <p>These changes can't be reverted!</p>
+    <button onClick={()=>handleSelect('proceed')}>Proceed</button>
+  </div>
+
+  }
   return (
     <div>
       <Header />
@@ -58,6 +79,9 @@ function App() {
           </menu>
           {topic}
         </section>
+        <div>
+      {choosen}
+      </div>  
       </main>
     </div>
   );
