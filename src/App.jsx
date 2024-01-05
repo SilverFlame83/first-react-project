@@ -27,25 +27,25 @@ function App() {
     );
   }
 
-  const [selectedBtn, useSelectedBtn] = useState()
-  function handleSelect(btn){
-    if(btn == 'proceed'){
-      useSelectedBtn(false)
-    }else{
-      useSelectedBtn(true)
+  const [selectedBtn, useSelectedBtn] = useState();
+  function handleSelect(btn) {
+    if (btn == "proceed") {
+      useSelectedBtn(false);
+    } else {
+      useSelectedBtn(true);
     }
-    
   }
 
-  let choosen =   <button onClick={()=>handleSelect('del')}>Delete</button>;
+  let choosen = <button onClick={() => handleSelect("del")}>Delete</button>;
 
-  if(selectedBtn){
-    choosen =   <div data-testid="alert" id="alert">
-    <h2>Are you sure?</h2>
-    <p>These changes can't be reverted!</p>
-    <button onClick={()=>handleSelect('proceed')}>Proceed</button>
-  </div>
-
+  if (selectedBtn) {
+    choosen = (
+      <div data-testid="alert" id="alert">
+        <h2>Are you sure?</h2>
+        <p>These changes can't be reverted!</p>
+        <button onClick={() => handleSelect("proceed")}>Proceed</button>
+      </div>
+    );
   }
   return (
     <div>
@@ -66,22 +66,34 @@ function App() {
         <section id="examples">
           <h2>Examples</h2>
           <menu>
-            <TabButtons onSelect={() => selectHandler("components")}>
+            <TabButtons
+              isSelected={selectedTopic === "components"}
+              onSelect={() => selectHandler("components")}
+            >
               Components
             </TabButtons>
-            <TabButtons onSelect={() => selectHandler("jsx")}>JSX</TabButtons>
-            <TabButtons onSelect={() => selectHandler("props")}>
+            <TabButtons
+              isSelected={selectedTopic === "jsx"}
+              onSelect={() => selectHandler("jsx")}
+            >
+              JSX
+            </TabButtons>
+            <TabButtons
+              isSelected={selectedTopic === "props"}
+              onSelect={() => selectHandler("props")}
+            >
               Props
             </TabButtons>
-            <TabButtons onSelect={() => selectHandler("state")}>
+            <TabButtons
+              isSelected={selectedTopic === "state"}
+              onSelect={() => selectHandler("state")}
+            >
               State
             </TabButtons>
           </menu>
           {topic}
         </section>
-        <div>
-      {choosen}
-      </div>  
+        <div>{choosen}</div>
       </main>
     </div>
   );
